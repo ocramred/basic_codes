@@ -14,7 +14,7 @@ done
 ```bash
 # simple one liner
 for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done
-````
+```
 ### convert transparent layer PNG to JPG
 `convert original-image.png -background white -flatten -alpha off new-image.jpg`
 
@@ -35,6 +35,23 @@ for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done
 
 > get Info: `mogrify -list gravity`  
 > gravity choices: NorthWest, North, NorthEast, West, Center, East, SouthWest, South, SouthEast.
+
+### rotate image
+`convert INPUT-FILE -rotate 90 OUTPUT-FILE`
+- rotate images in a folder and rename:
+```bash
+for file in *.jpg; do convert $file -rotate 90 rotated-file; done
+```
+
+### mirror picture in a folder and rename
+- vertical
+```bash
+for file in *.jpg; do convert $file -flip flipped-$file; done
+```
+- horizontal
+```bash
+for file in *.jpg; do convert $file -flop flopped-$file; done
+```
 
 
 ### COLORSPACE
