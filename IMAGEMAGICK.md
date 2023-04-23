@@ -53,6 +53,12 @@ for file in *.jpg; do convert $file -flip flipped-$file; done
 for file in *.jpg; do convert $file -flop flopped-$file; done
 ```
 
+## create gif from images in folder
+```bash
+convert -delay 20 -loop 0 *.jpg myimage.gif
+```
+
+
 
 ### COLORSPACE
 - in den richtigen Farbraum konvertieren    
@@ -60,8 +66,11 @@ for file in *.jpg; do convert $file -flop flopped-$file; done
 
 `magick -set colorspace CMYK` 
 
-## UPSCALE:
+## Upscale:
+```bash
 convert -units PixelsPerInch image -resample 150 resultimage
-## RESIZE:
+```
+## Resize:
 - `convert INPUT  -adaptive-resize 80x80  OUTPUT`  
 - `mogrify -adaptive-resize 200% -quality 100 -path ../biggest *.tif`
+

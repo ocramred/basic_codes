@@ -30,7 +30,7 @@ extract every 4th frame
 ## ☞ SWITCH CONTAINER : convert video file
 > `-qscale` sets the compression level. The lower the qscale value, the bet­ter the qual­ity. The avail­able qscale val­ues range from 1 (high­est qual­ity) to 31 (low­est qual­ity)
 > to preserve the quality of your source video file, use '-qscale 0' parameter:  
-> Alternative as mentioned in the comments, which re-encodes with best quaility (-qscale 0):
+> Alternative as mentioned in the comments, which re-encodes with best quality (-qscale 0):
 `ffmpeg -i input.webm -qscale 0 output.mp4`
 or  
 `ffmpeg -i input.mov -q:v 0 output.mp4`

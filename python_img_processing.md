@@ -1,4 +1,5 @@
-
+Make an image with random noise
+img = np.random.randint(0,255,size = [512,512,3])
 
 
 
