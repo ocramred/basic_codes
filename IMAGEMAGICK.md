@@ -1,6 +1,8 @@
 # ImageMagick
-
+---
 - [ImageMagick](#imagemagick)
+  - [BASIC MEDIA INFO](#basic-media-info)
+    - [Identify](#identify)
   - [CONVERT : single file editing](#convert--single-file-editing)
     - [convert transparent layer PNG to JPG](#convert-transparent-layer-png-to-jpg)
   - [MOGRIFY :  Batch convert file](#mogrify---batch-convert-file)
@@ -20,6 +22,13 @@
   - [COLORSPACE](#colorspace)
   - [Resolution](#resolution)
     - [Upscale:](#upscale)
+
+---
+## BASIC MEDIA INFO
+### Identify
+```bash
+$ identitfy INPUTFILE
+```
 
 ## CONVERT : single file editing
 - [Tutorial](https://www.opensourcefeed.org/00-convert-png-to-jpg-imagemagick/) 
@@ -115,7 +124,7 @@ for file in *.jpg; do convert $file -flop flopped-$file; done
 
 ## GIF: create gif from images in folder
 ```bash
-$ convert -delay 20 -loop 0 *.jpg myimage.gif
+$ convert -delay 20 -loop 0 *.jpg -scale heightxwidth myimage.gif
 ```
 
 
