@@ -2,7 +2,8 @@
 ---
 - [ImageMagick](#imagemagick)
   - [BASIC MEDIA INFO](#basic-media-info)
-    - [Identify](#identify)
+    - [identify](#identify)
+    - [sips](#sips)
   - [CONVERT : single file editing](#convert--single-file-editing)
     - [convert transparent layer PNG to JPG](#convert-transparent-layer-png-to-jpg)
   - [MOGRIFY :  Batch convert file](#mogrify---batch-convert-file)
@@ -25,9 +26,15 @@
 
 ---
 ## BASIC MEDIA INFO
-### Identify
+### identify
+> works for all media files
 ```bash
-$ identitfy INPUTFILE
+$ identify -verbose INPUTFILE
+````
+### sips
+> image files only
+```bash
+$ sips -g all IMAGEFILE
 ```
 
 ## CONVERT : single file editing
