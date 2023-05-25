@@ -1,8 +1,30 @@
 # ImageMagick
+
+- [ImageMagick](#imagemagick)
+  - [CONVERT : single file editing](#convert--single-file-editing)
+    - [convert transparent layer PNG to JPG](#convert-transparent-layer-png-to-jpg)
+  - [MOGRIFY :  Batch convert file](#mogrify---batch-convert-file)
+  - [Re-Size](#re-size)
+    - [Re-Size Image in percentage](#re-size-image-in-percentage)
+    - [Re-size all images in folder and keep ratio (but keep minimal width)](#re-size-all-images-in-folder-and-keep-ratio-but-keep-minimal-width)
+    - [adaptive Resize:](#adaptive-resize)
+  - [Crop](#crop)
+    - [Crop images to a specific size](#crop-images-to-a-specific-size)
+    - [Crop images into a specific area](#crop-images-into-a-specific-area)
+  - [Transform](#transform)
+    - [rotate image](#rotate-image)
+    - [mirror picture in a folder and rename](#mirror-picture-in-a-folder-and-rename)
+  - [create gif from images in folder](#create-gif-from-images-in-folder)
+  - [COLORSPACE](#colorspace)
+  - [Resolution](#resolution)
+    - [Upscale:](#upscale)
+
 ## CONVERT : single file editing
 - [Tutorial](https://www.opensourcefeed.org/00-convert-png-to-jpg-imagemagick/) 
 
-`convert ORIGINAL-IMAGE CONVERTED-IMAGE`
+```bash
+$ convert INPUT-IMAGE OUTPUT-IMAGE
+```
 
 ```bash
 # bash: simple batch job
@@ -13,29 +35,49 @@ done
 ```
 ```bash
 # simple one liner
-for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done
+$ for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done
 ```
 ### convert transparent layer PNG to JPG
-`convert original-image.png -background white -flatten -alpha off new-image.jpg`
-
+```bash
+$ convert original-image.png -background white -flatten -alpha off new-image.jpg
+```
 
 
 ## MOGRIFY :  Batch convert file
 - inside the picture path  
-`mogrify -format jpg -quality 100 *.png`
+`$ mogrify -format jpg -quality 100 *.png`
 - move result in new folder  
-`mogrify -format png -path ./converted *.jpg`
+`$ mogrify -format png -path ./converted *.jpg`
+
+## Re-Size
+### Re-Size Image in percentage
+`$ convert -resize 50% INPUTFILE OUTPUTFILE`
+
+### Re-size all images in folder and keep ratio (but keep minimal width)
+`$ mogrify -resize „1024x512^“ *.jpg`
+
+### adaptive Resize:
+```bash
+$ convert INPUT  -adaptive-resize 80x80  OUTPUT
+```
+```bash
+`mogrify -adaptive-resize 200% -quality 100 -path ../biggest *.tif
+```
 
 
-## Re-size all images in folder and keep ratio (but keep minimal width)
-`mogrify -resize „1024x512^“ *.jpg`
+## Crop
+### Crop images to a specific size
+`$ mogrify -gravity center -extent 1024x512 *.jpg`
 
-## Crop images to a specific size
-`mogrify -gravity center -extent 1024x512 Images/20220213_myself/*.jpg`
-
-> get Info: `mogrify -list gravity`  
+> get Info: `$ mogrify -list gravity`  
 > gravity choices: NorthWest, North, NorthEast, West, Center, East, SouthWest, South, SouthEast.
 
+### Crop images into a specific area
+`$ convert -crop 50x50+100+100 INPUTFILE OUTPUTFILE`
+> creates an 50x50 px Image starting from 100px 100px in the left upper corner
+
+
+## Transform
 ### rotate image
 `convert INPUT-FILE -rotate 90 OUTPUT-FILE`
 - rotate images in a folder and rename:
@@ -60,17 +102,15 @@ convert -delay 20 -loop 0 *.jpg myimage.gif
 
 
 
-### COLORSPACE
-- in den richtigen Farbraum konvertieren    
-`convert input.tiff -colorspace cmyk -profile ECI_Offset_2009/ISOcoated_v2_300_eci.icc output_cmyk2.tiff` 
-
+## COLORSPACE
+- in den richtigen Farbraum konvertieren  
 `magick -set colorspace CMYK` 
 
-## Upscale:
-```bash
-convert -units PixelsPerInch image -resample 150 resultimage
+```bash 
+$ convert input.tiff -colorspace cmyk -profile ECI_Offset_2009/ISOcoated_v2_300_eci.icc output_cmyk2.tiff  
 ```
-## Resize:
-- `convert INPUT  -adaptive-resize 80x80  OUTPUT`  
-- `mogrify -adaptive-resize 200% -quality 100 -path ../biggest *.tif`
-
+## Resolution
+### Upscale:
+```bash
+convert -units PixelsPerInch INPUTFILE -resample 150 OUTPUTFILE
+```
